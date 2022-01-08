@@ -1,7 +1,12 @@
+import {GlobalProvider} from "./component/MiniExpenseTracker/context/GlobalContext"
+import ExpenseTracker from "./component/MiniExpenseTracker/ExpenseTracker"
+
 function App() {
   return (
     <div>
-      <h1>Hi, Whats up</h1>
+      <GlobalProvider>
+        <ExpenseTracker/>
+      </GlobalProvider>
     </div>
   );
 }
