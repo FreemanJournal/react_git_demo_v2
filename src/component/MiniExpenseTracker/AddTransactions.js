@@ -11,6 +11,8 @@ const initialTransaction = {
 export default function AddTransactions() {
   const [transactions, setTransactions] = useState(initialTransaction)
   const {addTransactions} = useContext(GlobalContext)
+  const handleChange = ({target:{name,value}})=>setTransactions({...transactions,[name]:value})
+
   const submitHandler = ()=>{
     if( !transactions.amount||!transactions.des)return
     const NewTransactions ={
@@ -32,18 +34,18 @@ export default function AddTransactions() {
       <form className='flex flex-col gap-4 text-lg'>
         <div>
           <label className='text-left block mb-2 font-medium'>Type</label>
-          <select className='block w-full p-2 rounded-md outline-none' onChange={(e) => setTransactions({ ...transactions, type: e.target.value })}>
+          <select className='block w-full p-2 rounded-md outline-none' name='type' onChange={handleChange}>
             <option>Income</option>
             <option>Expense</option>
           </select>
         </div>
         <div>
           <label className='text-left block mb-2 font-medium'>Description</label>
-          <input type="text" placeholder="Enter text...." value={transactions.des} className='block w-full p-2 rounded-md focus:outline-none focus:ring-2 ring-green-500  shadow-inner' onChange={(e) => setTransactions({ ...transactions, des: e.target.value })} />
+          <input type="text" placeholder="Enter text...." value={transactions.des} className='block w-full p-2 rounded-md focus:outline-none focus:ring-2 ring-green-500  shadow-inner' name='des' onChange={handleChange} />
         </div>
         <div>
           <label className='text-left block mb-2 font-medium'>Amount</label>
-          <input type="number" placeholder="Enter Amount...." value={transactions.amount} className='block w-full p-2 rounded-md focus:outline-none focus:ring-2 ring-green-500 shadow-inner' onChange={(e) => setTransactions({ ...transactions, amount: e.target.value })} />
+          <input type="number" placeholder="Enter Amount...." value={transactions.amount} className='block w-full p-2 rounded-md focus:outline-none focus:ring-2 ring-green-500 shadow-inner' name='amount' onChange={handleChange} />
         </div>
         <button type='button' className='block w-full p-2 rounded-md outline-none bg-green-500 text-white font-semibold tracking-wider hover:bg-green-700 duration-300' onClick={submitHandler}>Add Transaction</button>
         
